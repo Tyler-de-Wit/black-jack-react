@@ -29,17 +29,30 @@ function App() {
   // Start a new game
   const startGame = () => {
     const deck = shuffleDeck(deckOfCards);
+    let playersTurn = true;
 
     // Draw player and dealer's starting cards
     const playersHand = [deck[0], deck[2]];
     const dealersHand = [deck[1], deck[3]];
+
+    // Check for player Blackjack
+    if (calculateHandValue(playersHand) === 21) {
+      console.log("Blackjack");
+      playersTurn = false;
+    }
+
+    // Check for dealer Blackjack
+    if (calculateHandValue(dealersHand) === 21) {
+      console.log("Dealer Blackjack");
+      playersTurn = false;
+    }
 
     // Update state
     setGame({
       playersHand,
       dealersHand,
       deck: deck.slice(4),
-      playersTurn: true,
+      playersTurn: playersTurn,
     });
   };
 
