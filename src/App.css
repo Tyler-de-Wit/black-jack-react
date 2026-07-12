@@ -1,10 +1,39 @@
+main {
+  max-width: 80vw;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
 /* Playing Card */
 .playing-card {
   margin: 1rem;
   padding: 1rem 0.5rem;
   border: 2px solid #000000;
   border-radius: 8px;
-  max-width: 10rem;
+  max-width: 11rem;
   text-align: center;
   font-weight: 600;
+  display: inline-block;
+}
+
+.card-hands {
+}
+
+.dealers-hand,
+.players-hand {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.game-buttons {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 1rem;
+}
+.game-buttons button {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
