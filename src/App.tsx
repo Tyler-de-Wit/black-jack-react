@@ -1,6 +1,7 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import shuffleDeck from "./lib/shuffleDeck";
+import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
 import deckOfCards from "./data/deckOfCards";
 
@@ -45,6 +46,9 @@ function App() {
     setCurrentDeck((prevDeck) => prevDeck.slice(1));
     setHand((prevHand) => [...prevHand, drawnCard]);
   };
+
+  console.log(`Dealers Hand: ${calculateHandValue(dealersHand)}`);
+  console.log(`Players Hand ${calculateHandValue(playersHand)}`);
 
   return (
     <>
