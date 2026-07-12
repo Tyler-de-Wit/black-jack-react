@@ -4,6 +4,7 @@ import shuffleDeck from "./lib/shuffleDeck";
 import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
 import Button from "./components/Button";
+import GameStatistics from "./components/GameStatistics";
 import deckOfCards from "./data/deckOfCards";
 
 type Card = {
@@ -20,6 +21,12 @@ type GameState = {
   resultMessage: string;
 };
 
+type GameStatisticsState = {
+  gamesPlayed: number;
+  dealerWins: number;
+  playerWins: number;
+};
+
 function App() {
   const [game, setGame] = useState<GameState>({
     playersHand: [],
@@ -27,6 +34,11 @@ function App() {
     deck: [],
     playersTurn: true,
     resultMessage: "",
+  });
+  const [gameStatistics, setGameStatistics] = useState<GameStatisticsState>({
+    gamesPlayed: 0,
+    dealerWins: 0,
+    playerWins: 0,
   });
 
   // Start a new game
@@ -39,16 +51,30 @@ function App() {
     const playersHand = [deck[0], deck[2]];
     const dealersHand = [deck[1], deck[3]];
 
+    if (
+      calculateHandValue(playersHand) === 21 &&
+      calculateHandValue(dealersHand) === 21
+    ) {
+      playersTurn = false;
+      resultMessage = "Push, Both Have Blackjack";
+
+      finishGame("push");
+    }
+
     // Check for player Blackjack
-    if (calculateHandValue(playersHand) === 21) {
+    else if (calculateHandValue(playersHand) === 21) {
       playersTurn = false;
       resultMessage = "Blackjack, You Win!";
+
+      finishGame("player");
     }
 
     // Check for dealer Blackjack
-    if (calculateHandValue(dealersHand) === 21) {
+    else if (calculateHandValue(dealersHand) === 21) {
       playersTurn = false;
-      resultMessage = "Dealer Blackjack, You Loose";
+      resultMessage = "Dealer Blackjack, You Lose";
+
+      finishGame("dealer");
     }
 
     // Update state
@@ -82,8 +108,10 @@ function App() {
     // Check for player Blackjack or Bust
     if (value === 21) {
       resultMessage = "Blackjack, You Win!";
+      finishGame("player");
     } else if (value > 21) {
-      resultMessage = "Bust, You Loose";
+      resultMessage = "Bust, You Lose";
+      finishGame("dealer");
     }
 
     // Update state
@@ -119,14 +147,19 @@ function App() {
     const playerValue = calculateHandValue(playersHand);
     if (dealerValue > 21) {
       resultMessage = "Dealer Bust, You Win!";
+      finishGame("player");
     } else if (dealerValue === 21) {
-      resultMessage = "Dealer Blackjack, You Loose";
+      resultMessage = "Dealer Blackjack, You Lose";
+      finishGame("dealer");
     } else if (dealerValue > playerValue) {
-      resultMessage = "Dealer Higher Total, You Loose";
+      resultMessage = "Dealer Higher Total, You Lose";
+      finishGame("dealer");
     } else if (playerValue > dealerValue) {
       resultMessage = "Player Higher Total, You Win!";
+      finishGame("player");
     } else if (playerValue === dealerValue) {
       resultMessage = "Push, Player And Dealer Are Tied";
+      finishGame("push");
     }
 
     // Update state
@@ -137,6 +170,15 @@ function App() {
       playersTurn: false,
       resultMessage,
     });
+  };
+
+  // Update game statistics when game finishes
+  const finishGame = (winner: "player" | "dealer" | "push") => {
+    setGameStatistics((prev) => ({
+      gamesPlayed: prev.gamesPlayed + 1,
+      playerWins: prev.playerWins + (winner === "player" ? 1 : 0),
+      dealerWins: prev.dealerWins + (winner === "dealer" ? 1 : 0),
+    }));
   };
 
   return (
@@ -170,6 +212,11 @@ function App() {
         <Button onClick={startGame} message="New Game" />
         <p>{game.resultMessage}</p>
       </div>
+      <GameStatistics
+        gamesPlayed={gameStatistics.gamesPlayed}
+        dealerWins={gameStatistics.dealerWins}
+        playerWins={gameStatistics.playerWins}
+      />
       <p>Dealer stands on all 17's</p>
     </main>
   );

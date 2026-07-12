@@ -17,6 +17,7 @@ main {
 }
 
 .card-hands {
+  margin-bottom: 2rem;
 }
 
 .dealers-hand,
@@ -36,4 +37,53 @@ main {
   margin: 0.5rem;
   font-weight: 600;
   font-size: 1rem;
+}
+
+/* Statistics Table */
+/* Container to make the table horizontally scrollable on small screens */
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Base table styling */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Merges cell borders */
+  table-layout: fixed; /* Makes column widths predictable */
+  font-family: sans-serif;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+/* Header row styling */
+thead {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+/* Content cells padding and alignment */
+th,
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dddddd;
+}
+
+/* Zebra striping (alternating row backgrounds) */
+tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+/* Hover effect on table rows */
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Bold the text for table headers */
+th {
+  font-weight: bold;
 }
