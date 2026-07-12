@@ -3,6 +3,7 @@ import { useState } from "react";
 import shuffleDeck from "./lib/shuffleDeck";
 import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
+import Button from "./components/Button";
 import deckOfCards from "./data/deckOfCards";
 
 type Card = {
@@ -155,14 +156,18 @@ function App() {
         </div>
       </section>
       <div className="game-buttons">
-        <button onClick={handleHit} disabled={!game.playersTurn}>
-          Hit
-        </button>
-        <button onClick={handleStand} disabled={!game.playersTurn}>
-          Stand
-        </button>
+        <Button
+          onClick={handleHit}
+          disabled={!game.playersTurn}
+          message="Hit"
+        />
+        <Button
+          onClick={handleStand}
+          disabled={!game.playersTurn}
+          message="Stand"
+        />
         <br />
-        <button onClick={startGame}>New Game</button>
+        <Button onClick={startGame} message="New Game" />
         <p>{game.resultMessage}</p>
       </div>
       <p>Dealer stands on all 17's</p>
