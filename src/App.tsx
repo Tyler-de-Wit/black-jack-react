@@ -11,104 +11,122 @@ type Card = {
   suit: string;
 };
 
+type GameState = {
+  playersHand: Card[];
+  dealersHand: Card[];
+  deck: Card[];
+  playersTurn: boolean;
+};
+
 function App() {
-  const [playersHand, setPlayersHand] = useState<Card[]>([]);
-  const [dealersHand, setDealersHand] = useState<Card[]>([]);
-  const [currentDeck, setCurrentDeck] = useState<Card[]>([]);
-  const [playersTurn, setPlayersTurn] = useState(true);
+  const [game, setGame] = useState<GameState>({
+    playersHand: [],
+    dealersHand: [],
+    deck: [],
+    playersTurn: true,
+  });
 
-  // Initialise a new game using a local fresh deck
+  // Start a new game
   const startGame = () => {
-    setPlayersTurn(true);
+    const deck = shuffleDeck(deckOfCards);
 
-    // Shuffle deck
-    const localDeck = shuffleDeck(deckOfCards);
+    // Draw player and dealer's starting cards
+    const playersHand = [deck[0], deck[2]];
+    const dealersHand = [deck[1], deck[3]];
 
-    // Deal starting cards
-    const pHand = [localDeck[0], localDeck[2]];
-    const dHand = [localDeck[1], localDeck[3]];
-
-    // Remove dealt cards from local deck
-    const remainingDeck = localDeck.slice(4);
-
-    // Update state with local values
-    setPlayersHand(pHand);
-    setDealersHand(dHand);
-    setCurrentDeck(remainingDeck);
+    // Update state
+    setGame({
+      playersHand,
+      dealersHand,
+      deck: deck.slice(4),
+      playersTurn: true,
+    });
   };
 
-  // Give the player another card
+  // Draw a new card for the player
   const handleHit = () => {
-    // Get deck and draw a card
-    const deck = [...currentDeck];
-    const card = deck.shift()!;
+    // Get deck and draw card for player
+    const deck = [...game.deck];
+    const card = deck.shift();
 
-    // Get players hand and calculate its value
-    const hand = [...playersHand, card];
-    const value = calculateHandValue(hand);
+    // Check if deck is empty
+    if (!card) return;
 
-    // Update state with player's hand and deck
-    setPlayersHand(hand);
-    setCurrentDeck(deck);
+    // Add card to players hand and calculate it's new value
+    const playersHand = [...game.playersHand, card];
+    const value = calculateHandValue(playersHand);
+
+    // Finish players turn if their hand is over 21
+    const playersTurn = value < 21;
+
+    // Update state
+    setGame({
+      ...game,
+      playersHand,
+      deck,
+      playersTurn,
+    });
 
     // Check for player Blackjack or Bust
-    if (value >= 21) {
-      setPlayersTurn(false);
-
-      if (value === 21) {
-        console.log("Blackjack");
-      } else {
-        console.log("Bust");
-      }
+    if (value === 21) {
+      console.log("Blackjack");
+    } else if (value > 21) {
+      console.log("Bust");
     }
   };
 
-  // Finish the players turn and deal cards to the dealer
+  // End player's turn and draw dealer's cards
   const handleStand = () => {
-    setPlayersTurn(false);
+    // Get deck and dealer's hand
+    const deck = [...game.deck];
+    const dealersHand = [...game.dealersHand];
 
-    // Get deck and dealers current hand
-    let deck = [...currentDeck];
-    let dealerHand = [...dealersHand];
+    // Draw cards for the dealer while their hand is less than 17
+    while (calculateHandValue(dealersHand) < 17) {
+      const card = deck.shift();
 
-    // Draw cards for the dealer while their total is less than 17
-    while (calculateHandValue(dealerHand) < 17) {
-      dealerHand.push(deck.shift()!);
+      if (!card) break;
+
+      dealersHand.push(card);
     }
 
-    // Update state with dealer's hand and deck
-    setDealersHand(dealerHand);
-    setCurrentDeck(deck);
-
-    // Check for dealer Bust
-    const dealerValue = calculateHandValue(dealerHand);
+    // Check for a dealer Bust
+    const dealerValue = calculateHandValue(dealersHand);
     if (dealerValue > 21) {
       console.log("Dealer Bust");
     }
+
+    // Update state
+    setGame({
+      ...game,
+      dealersHand,
+      deck,
+      playersTurn: false,
+    });
   };
 
-  console.log(`Dealers Hand: ${calculateHandValue(dealersHand)}`);
-  console.log(`Players Hand ${calculateHandValue(playersHand)}`);
+  console.log(`Dealer: ${calculateHandValue(game.dealersHand)}`);
+  console.log(`Player: ${calculateHandValue(game.playersHand)}`);
 
   return (
     <>
       <div>
         <h2>Dealers Hand</h2>
-        {dealersHand.map((card) => (
+        {game.dealersHand.map((card) => (
           <PlayingCard value={card.value} suit={card.suit} key={card.id} />
         ))}
       </div>
       <div>
         <h2>Players Hand</h2>
-        {playersHand.map((card) => (
+        {game.playersHand.map((card) => (
           <PlayingCard value={card.value} suit={card.suit} key={card.id} />
         ))}
       </div>
       <button onClick={startGame}>New Game</button>
-      <button onClick={handleHit} disabled={!playersTurn}>
+      <button onClick={handleHit} disabled={!game.playersTurn}>
         Hit
       </button>
-      <button onClick={handleStand} disabled={!playersTurn}>
+      <button onClick={handleStand} disabled={!game.playersTurn}>
         Stand
       </button>
       <p>Dealer stands on all 17's</p>
