@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import shuffleDeck from "./lib/shuffleDeck";
 import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
@@ -15,9 +15,13 @@ function App() {
   const [playersHand, setPlayersHand] = useState<Card[]>([]);
   const [dealersHand, setDealersHand] = useState<Card[]>([]);
   const [currentDeck, setCurrentDeck] = useState<Card[]>([]);
+  const [playersTurn, setPlayersTurn] = useState(true);
 
   // Initialise a new game using a local fresh deck
   const startGame = () => {
+    setPlayersTurn(true);
+
+    // Shuffle deck
     const localDeck = shuffleDeck(deckOfCards);
 
     // Deal starting cards
@@ -33,18 +37,54 @@ function App() {
     setCurrentDeck(remainingDeck);
   };
 
-  // Add a card to the player or dealers hand from the current deck
-  const addCardToHand = (
-    setHand: React.Dispatch<React.SetStateAction<Card[]>>,
-  ) => {
-    if (currentDeck.length === 0) return;
+  // Give the player another card
+  const handleHit = () => {
+    // Get deck and draw a card
+    const deck = [...currentDeck];
+    const card = deck.shift()!;
 
-    // Draw card from top of deck
-    const drawnCard = currentDeck[0];
+    // Get players hand and calculate its value
+    const hand = [...playersHand, card];
+    const value = calculateHandValue(hand);
 
-    // Update currentDeck and hand state from the drawn card
-    setCurrentDeck((prevDeck) => prevDeck.slice(1));
-    setHand((prevHand) => [...prevHand, drawnCard]);
+    // Update state with player's hand and deck
+    setPlayersHand(hand);
+    setCurrentDeck(deck);
+
+    // Check for player Blackjack or Bust
+    if (value >= 21) {
+      setPlayersTurn(false);
+
+      if (value === 21) {
+        console.log("Blackjack");
+      } else {
+        console.log("Bust");
+      }
+    }
+  };
+
+  // Finish the players turn and deal cards to the dealer
+  const handleStand = () => {
+    setPlayersTurn(false);
+
+    // Get deck and dealers current hand
+    let deck = [...currentDeck];
+    let dealerHand = [...dealersHand];
+
+    // Draw cards for the dealer while their total is less than 17
+    while (calculateHandValue(dealerHand) < 17) {
+      dealerHand.push(deck.shift()!);
+    }
+
+    // Update state with dealer's hand and deck
+    setDealersHand(dealerHand);
+    setCurrentDeck(deck);
+
+    // Check for dealer Bust
+    const dealerValue = calculateHandValue(dealerHand);
+    if (dealerValue > 21) {
+      console.log("Dealer Bust");
+    }
   };
 
   console.log(`Dealers Hand: ${calculateHandValue(dealersHand)}`);
@@ -65,6 +105,13 @@ function App() {
         ))}
       </div>
       <button onClick={startGame}>New Game</button>
+      <button onClick={handleHit} disabled={!playersTurn}>
+        Hit
+      </button>
+      <button onClick={handleStand} disabled={!playersTurn}>
+        Stand
+      </button>
+      <p>Dealer stands on all 17's</p>
     </>
   );
 }
