@@ -187,8 +187,14 @@ function App() {
       <div className="game-wrapper">
         {/* Player titles and card count */}
         <div className="player-information">
-          <h2>Dealer {calculateHandValue(game.dealersHand)}</h2>
-          <h2>Player {calculateHandValue(game.playersHand)}</h2>
+          <div>
+            <h2>Dealer</h2>
+            <p>{calculateHandValue(game.dealersHand)}</p>
+          </div>
+          <div>
+            <h2>Player</h2>
+            <p>{calculateHandValue(game.playersHand)}</p>
+          </div>
         </div>
         {/* Player cards */}
         <div className="player-cards">
