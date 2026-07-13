@@ -182,6 +182,10 @@ td {
   background-color: var(--accent);
   color: var(--text);
 }
+.result-push {
+  background-color: var(--secondary);
+  color: var(--dark-text);
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

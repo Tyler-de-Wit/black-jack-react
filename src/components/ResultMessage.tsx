@@ -9,6 +9,8 @@ function ResultMessage({ message }: ResultMessageProps) {
     resultColour = "lose";
   } else if (message.includes("Win")) {
     resultColour = "win";
+  } else if (message.includes("Push")) {
+    resultColour = "push";
   }
 
   return (
