@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import shuffleDeck from "./lib/shuffleDeck";
 import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
@@ -180,6 +180,11 @@ function App() {
       dealerWins: prev.dealerWins + (winner === "dealer" ? 1 : 0),
     }));
   };
+
+  // Start a game on initial page load
+  useEffect(() => {
+    startGame();
+  }, []);
 
   return (
     <main>
