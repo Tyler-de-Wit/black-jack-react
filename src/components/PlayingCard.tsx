@@ -135,9 +135,11 @@ type PlayingCardProps = {
   value: string;
   // Suit the card belongs to: hearts, diamonds, clubs, spades.
   suit: string;
+  // Individual styling for each card
+  className: string;
 };
 
-function PlayingCard({ value, suit }: PlayingCardProps) {
+function PlayingCard({ value, suit, className }: PlayingCardProps) {
   // Build the id for the card based on the passed in props
   let cardId = `${value}-${suit}`.toLowerCase();
 
@@ -150,13 +152,15 @@ function PlayingCard({ value, suit }: PlayingCardProps) {
   }
 
   return (
-    <img
-      src={svgSource}
-      width={179}
-      height={250}
-      className="mb-1 me-2"
-      alt={`${value} of ${suit}`}
-    />
+    <div className={`playing-card card-${className}`}>
+      <img
+        src={svgSource}
+        width={179}
+        height={250}
+        className="mb-1 me-2"
+        alt={`${value} of ${suit}`}
+      />
+    </div>
   );
 }
 

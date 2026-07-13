@@ -1,6 +1,14 @@
 /* ---------- Colours ---------- */
 :root {
-  --white: #ffffff; /* White */
+  --background: #0b3d2e;
+  --surface: #14532d;
+  --primary: #d4af37;
+  --secondary: #f8f5e9;
+  --accent: #b22222;
+  --highlight: #facc15;
+  --success: #22c55e;
+  --text: #fafafa;
+  --dark-text: #1a1a1a;
 }
 
 /* ---------- Layout ---------- */

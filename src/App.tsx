@@ -183,41 +183,61 @@ function App() {
 
   return (
     <main>
-      <section className="card-hands">
-        <div className="dealers-hand">
+      <h1>Blackjack</h1>
+      <div className="game-wrapper">
+        {/* Player titles and card count */}
+        <div className="player-information">
           <h2>Dealer {calculateHandValue(game.dealersHand)}</h2>
-          {game.dealersHand.map((card) => (
-            <PlayingCard value={card.value} suit={card.suit} key={card.id} />
-          ))}
-        </div>
-        <div className="players-hand">
           <h2>Player {calculateHandValue(game.playersHand)}</h2>
-          {game.playersHand.map((card) => (
-            <PlayingCard value={card.value} suit={card.suit} key={card.id} />
-          ))}
         </div>
-      </section>
-      <div className="game-buttons">
-        <Button
-          onClick={handleHit}
-          disabled={!game.playersTurn}
-          message="Hit"
-        />
-        <Button
-          onClick={handleStand}
-          disabled={!game.playersTurn}
-          message="Stand"
-        />
-        <br />
-        <Button onClick={startGame} message="New Game" />
-        <p>{game.resultMessage}</p>
+        {/* Player cards */}
+        <div className="player-cards">
+          <div className="dealers-hand">
+            {game.dealersHand.map((card, index) => (
+              <PlayingCard
+                value={card.value}
+                suit={card.suit}
+                key={card.id}
+                className={index.toString()}
+              />
+            ))}
+          </div>
+          <div className="players-hand">
+            {game.playersHand.map((card, index) => (
+              <PlayingCard
+                value={card.value}
+                suit={card.suit}
+                key={card.id}
+                className={index.toString()}
+              />
+            ))}
+          </div>
+        </div>
+        {/* Game buttons */}
+        <div className="game-buttons">
+          <Button onClick={startGame} message="New Game" />
+          <div className="game-controls">
+            <Button
+              onClick={handleHit}
+              disabled={!game.playersTurn}
+              message="Hit"
+            />
+            <Button
+              onClick={handleStand}
+              disabled={!game.playersTurn}
+              message="Stand"
+            />
+          </div>
+        </div>
       </div>
+      {/* Game statistics */}
       <GameStatistics
         gamesPlayed={gameStatistics.gamesPlayed}
         dealerWins={gameStatistics.dealerWins}
         playerWins={gameStatistics.playerWins}
       />
       <p>Dealer stands on all 17's</p>
+      <p>{game.resultMessage}</p>
     </main>
   );
 }
