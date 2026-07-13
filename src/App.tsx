@@ -6,6 +6,7 @@ import PlayingCard from "./components/PlayingCard";
 import Button from "./components/Button";
 import GameStatistics from "./components/GameStatistics";
 import ResultMessage from "./components/ResultMessage";
+import BettingArea from "./components/BettingArea";
 import deckOfCards from "./data/deckOfCards";
 
 type Card = {
@@ -41,14 +42,30 @@ function App() {
     dealerWins: 0,
     playerWins: 0,
   });
+  const [currentBet, setCurrentBet] = useState<number>(5);
+  const [totalBalance, setTotalBalance] = useState<number>(5000);
 
-  // Update game statistics when game finishes
+  // Handle function for child bettingArea then Chip component to update state
+  const handleCurrentBetChange = (newBet: number) => {
+    setCurrentBet(newBet);
+  };
+
+  // Update game statistics and totalBalance when game finishes
   const finishGame = (winner: "player" | "dealer" | "push") => {
     setGameStatistics((prev) => ({
       gamesPlayed: prev.gamesPlayed + 1,
       playerWins: prev.playerWins + (winner === "player" ? 1 : 0),
       dealerWins: prev.dealerWins + (winner === "dealer" ? 1 : 0),
     }));
+
+    if (winner === "player") {
+      setTotalBalance((prev) => {
+        return prev + currentBet;
+      });
+    } else if (winner === "dealer")
+      setTotalBalance((prev) => {
+        return prev - currentBet;
+      });
   };
 
   // Start a new game
@@ -188,6 +205,8 @@ function App() {
       {!game.playersTurn && <ResultMessage message={game.resultMessage} />}
 
       <h1>Blackjack</h1>
+
+      {/* Game */}
       <div className="game-wrapper">
         {/* Player titles and card count */}
         <div className="player-information">
@@ -242,6 +261,14 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Betting */}
+      <BettingArea
+        handleCurrentBetChange={handleCurrentBetChange}
+        currentBet={currentBet}
+        totalBalance={totalBalance}
+      />
+
       {/* Game statistics */}
       <GameStatistics
         gamesPlayed={gameStatistics.gamesPlayed}
@@ -249,6 +276,8 @@ function App() {
         playerWins={gameStatistics.playerWins}
       />
       <p>Dealer stands on hard or soft 17</p>
+      <p>Min Bet: $5</p>
+      <p>Max Bet: $100</p>
     </main>
   );
 }

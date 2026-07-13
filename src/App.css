@@ -137,6 +137,24 @@ h6 {
   border: 2px solid var(--accent);
 }
 
+/* Betting Area */
+.betting-area {
+  background-color: var(--surface);
+  border: 2px solid var(--highlight);
+  padding: 1rem;
+  border-radius: 16px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+.chip {
+  display: inline-block;
+  border: 1px solid #000000;
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
 /* Statistics Table */
 .table-container {
   overflow-x: auto;
