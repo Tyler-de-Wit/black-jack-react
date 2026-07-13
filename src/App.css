@@ -165,11 +165,11 @@ td {
   font-weight: 500;
   width: 20rem;
   text-align: center;
-  padding: 1rem;
+  padding: 1.54rem 1rem;
   border-radius: 8px;
   font-size: 1.2rem;
   position: absolute;
-  top: 4.3rem;
+  top: 0rem;
   left: calc(50% - 10rem);
   z-index: 999;
   animation: fadeIn 0.2s ease-in-out forwards;
@@ -311,6 +311,6 @@ td {
 
   /* Result Message */
   .result-message {
-    top: 2.7rem;
+    padding: 0.74rem 1rem;
   }
 }
