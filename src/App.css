@@ -160,3 +160,34 @@ th,
 td {
   padding: 12px 15px;
 }
+
+/* Result Message */
+.result-message {
+  font-weight: 500;
+  width: 20rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 4.3rem;
+  left: calc(50% - 10rem);
+  z-index: 999;
+  animation: fadeIn 0.2s ease-in-out forwards;
+}
+.result-win {
+  background-color: var(--success);
+  color: var(--dark-text);
+}
+.result-lose {
+  background-color: var(--accent);
+  color: var(--text);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

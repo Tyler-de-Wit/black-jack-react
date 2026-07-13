@@ -5,6 +5,7 @@ import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
 import Button from "./components/Button";
 import GameStatistics from "./components/GameStatistics";
+import ResultMessage from "./components/ResultMessage";
 import deckOfCards from "./data/deckOfCards";
 
 type Card = {
@@ -183,6 +184,9 @@ function App() {
 
   return (
     <main>
+      {/* Result Message */}
+      {!game.playersTurn && <ResultMessage message={game.resultMessage} />}
+
       <h1>Blackjack</h1>
       <div className="game-wrapper">
         {/* Player titles and card count */}
@@ -242,8 +246,7 @@ function App() {
         dealerWins={gameStatistics.dealerWins}
         playerWins={gameStatistics.playerWins}
       />
-      <p>Dealer stands on all 17's</p>
-      <p>{game.resultMessage}</p>
+      <p>Dealer stands on hard or soft 17</p>
     </main>
   );
 }
