@@ -23,7 +23,7 @@ function calculateHandValue(currentHand: Card[]) {
       currentHandValue += currentCardsValue;
     }
     // Check if Ace should equal 11 or 1 and set it correspondingly
-    else if (card.value === "Ace") {
+    else {
       if (currentHandValue <= 10) {
         const currentCardsValue = 11;
         currentHandValue += currentCardsValue;

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import shuffleDeck from "./lib/shuffleDeck";
 import calculateHandValue from "./lib/calculateHandValue";
 import PlayingCard from "./components/PlayingCard";
@@ -40,6 +40,15 @@ function App() {
     dealerWins: 0,
     playerWins: 0,
   });
+
+  // Update game statistics when game finishes
+  const finishGame = (winner: "player" | "dealer" | "push") => {
+    setGameStatistics((prev) => ({
+      gamesPlayed: prev.gamesPlayed + 1,
+      playerWins: prev.playerWins + (winner === "player" ? 1 : 0),
+      dealerWins: prev.dealerWins + (winner === "dealer" ? 1 : 0),
+    }));
+  };
 
   // Start a new game
   const startGame = () => {
@@ -171,20 +180,6 @@ function App() {
       resultMessage,
     });
   };
-
-  // Update game statistics when game finishes
-  const finishGame = (winner: "player" | "dealer" | "push") => {
-    setGameStatistics((prev) => ({
-      gamesPlayed: prev.gamesPlayed + 1,
-      playerWins: prev.playerWins + (winner === "player" ? 1 : 0),
-      dealerWins: prev.dealerWins + (winner === "dealer" ? 1 : 0),
-    }));
-  };
-
-  // Start a game on initial page load
-  useEffect(() => {
-    startGame();
-  }, []);
 
   return (
     <main>

@@ -141,7 +141,7 @@ type PlayingCardProps = {
 
 function PlayingCard({ value, suit, className }: PlayingCardProps) {
   // Build the id for the card based on the passed in props
-  let cardId = `${value}-${suit}`.toLowerCase();
+  const cardId = `${value}-${suit}`.toLowerCase();
 
   // Lookup the svgSource from the object
   const svgSource = cardSvgs[cardId];
