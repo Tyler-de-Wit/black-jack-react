@@ -50,6 +50,7 @@ h6 {
 .playing-card {
   margin: 0.5rem;
   display: inline-block;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 .dealers-hand,
 .players-hand {
