@@ -225,7 +225,9 @@ function App() {
         </div>
         {/* Game buttons */}
         <div className="game-buttons">
-          <Button onClick={startGame} message="New Game" />
+          <div className="new-game">
+            <Button onClick={startGame} message="New Game" />
+          </div>
           <div className="game-controls">
             <Button
               onClick={handleHit}

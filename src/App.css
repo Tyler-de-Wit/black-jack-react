@@ -3,7 +3,7 @@ body {
 }
 
 main {
-  max-width: 50vw;
+  max-width: 60vw;
   margin: 0 auto;
 }
 
@@ -71,8 +71,6 @@ h6 {
 .card-10 {
   grid-column: 1;
   grid-row: 1;
-  width: 200px;
-  height: 150px;
 }
 .card-1 {
   margin-left: 60px;
@@ -189,5 +187,125 @@ td {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1200px) {
+  main {
+    max-width: 95vw;
+  }
+
+  /* Title */
+  h1 {
+    margin: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  /* Game */
+  .game-wrapper {
+    display: grid;
+    grid-template-areas:
+      "player-information player-cards"
+      "game-buttons game-buttons";
+    grid-template-columns: 75px auto;
+    grid-template-rows: 530px auto;
+    padding: 0.1rem;
+    height: 685px;
+  }
+
+  /* Player Information */
+  .player-information {
+    grid-area: player-information;
+    font-size: 0.9rem;
+  }
+  .player-information div:last-child {
+    margin-top: 0.8rem;
+  }
+
+  /* Player Cards */
+  .player-cards {
+    grid-area: player-cards;
+  }
+  .playing-card {
+    margin: 0.5rem;
+  }
+
+  /* Card Overlap */
+  .card-1 {
+    margin-left: 35px;
+    z-index: 1;
+  }
+  .card-2 {
+    margin-left: 65px;
+    z-index: 2;
+  }
+  .card-3 {
+    margin-left: 95px;
+    z-index: 3;
+  }
+  .card-4 {
+    margin-left: 125px;
+    z-index: 4;
+  }
+  .card-5 {
+    margin-left: 155px;
+    z-index: 5;
+  }
+  .card-6 {
+    margin-left: 185px;
+    z-index: 6;
+  }
+  .card-7 {
+    margin-left: 215px;
+    z-index: 7;
+  }
+  .card-8 {
+    margin-left: 245px;
+    z-index: 8;
+  }
+  .card-9 {
+    margin-left: 275px;
+    z-index: 9;
+  }
+  .card-10 {
+    margin-left: 305px;
+    z-index: 10;
+  }
+
+  /* Game Buttons */
+  .game-buttons {
+    grid-area: game-buttons;
+    display: block;
+    margin-top: 1rem;
+  }
+  .game-buttons button {
+    width: 50%;
+    margin: 0;
+    margin-bottom: 1.5rem;
+  }
+  .new-game button {
+    width: 100%;
+  }
+
+  /* Statistics Table */
+  .dealer-win-percentage {
+    font-size: 0;
+  }
+  .dealer-win-percentage::after {
+    content: "Dealer Win %";
+    font-size: 1rem;
+  }
+  .player-win-percentage {
+    font-size: 0;
+  }
+  .player-win-percentage::after {
+    content: "Player Win %";
+    font-size: 1rem;
+  }
+
+  /* Result Message */
+  .result-message {
+    top: 2.7rem;
   }
 }

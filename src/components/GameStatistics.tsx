@@ -18,8 +18,8 @@ function GameStatistics({
           <th>Games Played</th>
           <th>Dealer Wins</th>
           <th>Player Wins</th>
-          <th>Dealer Win Percentage</th>
-          <th>Player Win Percentage</th>
+          <th className="dealer-win-percentage">Dealer Win Percentage</th>
+          <th className="player-win-percentage">Player Win Percentage</th>
         </tr>
       </thead>
       <tbody>
