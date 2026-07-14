@@ -246,6 +246,25 @@ td {
   }
 }
 
+/* Empty Balance Message */
+.empty-balance-message {
+  padding: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  background-color: var(--secondary);
+  position: absolute;
+  width: 24rem;
+  max-width: 100vw;
+  top: 4.7rem;
+  left: calc(50% - 12rem);
+  border-radius: 8px;
+  z-index: 999;
+}
+.empty-balance-message p {
+  color: var(--dark-text);
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 1200px) {
   main {
@@ -372,5 +391,12 @@ td {
   /* Result Message */
   .result-message {
     padding: 0.8rem 1rem;
+  }
+
+  /* Empty Balance Message */
+  .empty-balance-message {
+    width: 100vw;
+    left: calc(50% - 50vw);
+    top: 3rem;
   }
 }

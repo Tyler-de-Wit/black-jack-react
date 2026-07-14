@@ -12,6 +12,7 @@ import BettingArea from "./components/BettingArea";
 import GameRules from "./components/GameRules";
 
 import deckOfCards from "./data/deckOfCards";
+import EmptyBalanceMessage from "./components/EmptyBalanceMessage";
 
 type Card = {
   id: number;
@@ -217,6 +218,9 @@ function App() {
     <main>
       {/* Result Message */}
       {!game.playersTurn && <ResultMessage message={game.resultMessage} />}
+
+      {/* Empty Balance Message */}
+      {totalBalance === 0 && <EmptyBalanceMessage />}
 
       <h1>Blackjack</h1>
 
