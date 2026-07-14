@@ -16,7 +16,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Hide overflow on mobile */
@@ -27,22 +26,34 @@ body {
 
 /* ---------- Fonts ---------- */
 /* Import Headings Font */
-/* @font-face {
-  font-family: "SpaceGrotesk";
-  src: url("assets/SpaceGrotesk-VariableFont_wght.ttf") format("woff2");
-} */
+@font-face {
+  font-family: "Cinzel";
+  src: url("assets/fonts/cinzel.ttf") format("woff2");
+}
 
-/* Set Body Font */
-/* body {
-  font-family: "Inter", sans-serif;
-} */
+/* Import Body Font */
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/inter.ttf") format("woff2");
+}
 
 /* Set Headings Font */
-/* h1,
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "SpaceGrotesk", sans-serif;
-} */
+  font-family: "Cinzel", sans-serif;
+}
+
+/* Set Body Font */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Set Buttons Font */
+button {
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+}
