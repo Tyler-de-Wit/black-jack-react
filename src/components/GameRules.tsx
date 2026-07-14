@@ -7,6 +7,7 @@ function GameRules() {
         <li>Min Bet: $5</li>
         <li>Max Bet: $100</li>
         <li>Reload page to reset balance</li>
+        <li>Hands are dealt from a single regulation deck</li>
       </ol>
     </section>
   );
