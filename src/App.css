@@ -163,6 +163,14 @@ h6 {
   cursor: pointer;
   transform: scale(0.98);
 }
+.chip-disabled {
+  opacity: 50%;
+}
+.chip-disabled:hover {
+  opacity: 50%;
+  transform: scale(1);
+  cursor: default;
+}
 
 /* Statistics Table */
 .table-container {

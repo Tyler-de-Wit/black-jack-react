@@ -7,6 +7,8 @@ import chip100 from "../assets/chips/chip-100.svg";
 type ChipProps = {
   // The value of the chip
   value: number;
+  // Total balance state value
+  totalBalance: number;
   // Function to update the current bet state
   onChipClick: (newBet: number) => void;
 };
@@ -19,15 +21,16 @@ const chipSvgs: Record<string, string> = {
   100: chip100,
 };
 
-function Chip({ value, onChipClick }: ChipProps) {
+function Chip({ value, totalBalance, onChipClick }: ChipProps) {
   const svgSource = chipSvgs[value];
 
   return (
     <button
-      className="chip"
+      className={`chip ${totalBalance < value ? "chip-disabled" : ""}`}
       onClick={() => {
         onChipClick(value);
       }}
+      disabled={totalBalance < value ? true : false}
     >
       <img src={svgSource} width={80} height={80} alt={`chip ${value}`} />
     </button>

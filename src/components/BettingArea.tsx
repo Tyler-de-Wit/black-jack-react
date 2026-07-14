@@ -26,11 +26,31 @@ function BettingArea({
       </div>
       <div>
         <h2>Chips</h2>
-        <Chip value={5} onChipClick={handleCurrentBetChange} />
-        <Chip value={10} onChipClick={handleCurrentBetChange} />
-        <Chip value={25} onChipClick={handleCurrentBetChange} />
-        <Chip value={50} onChipClick={handleCurrentBetChange} />
-        <Chip value={100} onChipClick={handleCurrentBetChange} />
+        <Chip
+          value={5}
+          totalBalance={totalBalance}
+          onChipClick={handleCurrentBetChange}
+        />
+        <Chip
+          value={10}
+          totalBalance={totalBalance}
+          onChipClick={handleCurrentBetChange}
+        />
+        <Chip
+          value={25}
+          totalBalance={totalBalance}
+          onChipClick={handleCurrentBetChange}
+        />
+        <Chip
+          value={50}
+          totalBalance={totalBalance}
+          onChipClick={handleCurrentBetChange}
+        />
+        <Chip
+          value={100}
+          totalBalance={totalBalance}
+          onChipClick={handleCurrentBetChange}
+        />
       </div>
     </div>
   );
