@@ -169,7 +169,6 @@ function PlayingCard({ value, suit, className, faceDown }: PlayingCardProps) {
         src={svgSource}
         width={179}
         height={250}
-        className="mb-1 me-2"
         alt={`${faceDown ? "Face down card" : `${value} of ${suit}`}`}
       />
     </div>
