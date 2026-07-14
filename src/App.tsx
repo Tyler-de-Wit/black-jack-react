@@ -15,21 +15,31 @@ import deckOfCards from "./data/deckOfCards";
 
 type Card = {
   id: number;
+  // Value of the card: 3, Ace, King etc.
   value: string;
+  // Suit the card belongs to: hearts, diamonds, clubs, spades.
   suit: string;
 };
 
 type GameState = {
+  // Array of Card objects which are in the users hand
   playersHand: Card[];
+  // Array of Card objects which are in the dealers hand
   dealersHand: Card[];
+  // Array of Card objects which are left in the deck to be dealt
   deck: Card[];
+  // Tracking the players turn to disable buttons and hide dealer's card
   playersTurn: boolean;
+  // Win or loss message when game finishes
   resultMessage: string;
 };
 
 type GameStatisticsState = {
+  // Amount of games played
   gamesPlayed: number;
+  // Amount of games in which the dealer won
   dealerWins: number;
+  // Amount of games in which the player won
   playerWins: number;
 };
 

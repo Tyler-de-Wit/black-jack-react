@@ -1,8 +1,11 @@
 import Chip from "./Chip";
 
 type BettingAreaProps = {
+  // Function to update the current bet state
   handleCurrentBetChange: (newBet: number) => void;
+  // Current bet state value
   currentBet: number;
+  // Total balance state value
   totalBalance: number;
 };
 

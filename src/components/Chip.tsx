@@ -5,7 +5,9 @@ import chip50 from "../assets/chips/chip-50.svg";
 import chip100 from "../assets/chips/chip-100.svg";
 
 type ChipProps = {
+  // The value of the chip
   value: number;
+  // Function to update the current bet state
   onChipClick: (newBet: number) => void;
 };
 

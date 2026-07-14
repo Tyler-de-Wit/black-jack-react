@@ -65,6 +65,7 @@ import spadesKing from "../assets/playing-cards/king-spades.svg";
 
 import backRed from "../assets/playing-cards/back-red.svg";
 
+// Lookup object for the playing card's SVG
 const cardSvgs: Record<string, string> = {
   "2-clubs": clubs2,
   "2-diamonds": diamonds2,

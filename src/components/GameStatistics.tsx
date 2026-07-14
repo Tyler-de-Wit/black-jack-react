@@ -1,8 +1,11 @@
 import calculatePercentage from "../lib/calculatePercentage";
 
 type GameStatisticsProps = {
+  // Amount of games played
   gamesPlayed: number;
+  // Amount of games in which the dealer won
   dealerWins: number;
+  // Amount of games in which the player won
   playerWins: number;
 };
 

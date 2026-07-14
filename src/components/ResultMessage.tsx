@@ -1,4 +1,5 @@
 type ResultMessageProps = {
+  // Win or loss message when game finishes
   message: string;
 };
 
