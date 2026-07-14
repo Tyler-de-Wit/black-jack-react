@@ -134,7 +134,8 @@ h6 {
 }
 .game-buttons button:hover {
   cursor: pointer;
-  border: 2px solid var(--accent);
+  opacity: 80%;
+  transform: scale(0.98);
 }
 
 /* Betting Area */
