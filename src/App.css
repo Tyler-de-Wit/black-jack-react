@@ -265,7 +265,7 @@ td {
   /* Player Information */
   .player-information {
     grid-area: player-information;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .player-information div:last-child {
     margin-top: 0.8rem;
