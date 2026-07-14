@@ -43,7 +43,7 @@ function App() {
     playerWins: 0,
   });
   const [currentBet, setCurrentBet] = useState<number>(5);
-  const [totalBalance, setTotalBalance] = useState<number>(5000);
+  const [totalBalance, setTotalBalance] = useState<number>(1000);
 
   // Handle function for child bettingArea then Chip component to update state
   const handleCurrentBetChange = (newBet: number) => {
