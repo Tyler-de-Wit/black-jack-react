@@ -21,7 +21,7 @@ function BettingArea({
     <div className="betting-area">
       <div>
         <h2>Bets</h2>
-        <p>Current Bet: ${currentBet}</p>
+        <p>Current Bet: ${totalBalance === 0 ? "0" : currentBet}</p>
         <p>Total Balance: ${formattedTotalBalance}</p>
       </div>
       <div>

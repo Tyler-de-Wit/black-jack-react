@@ -263,7 +263,11 @@ function App() {
         {/* Game buttons */}
         <div className="game-buttons">
           <div className="new-game">
-            <Button onClick={startGame} message="New Game" />
+            <Button
+              onClick={startGame}
+              disabled={totalBalance === 0}
+              message="New Game"
+            />
           </div>
           <div className="game-controls">
             <Button
