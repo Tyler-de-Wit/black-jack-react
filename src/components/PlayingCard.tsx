@@ -63,6 +63,8 @@ import diamondsKing from "../assets/playing-cards/king-diamonds.svg";
 import heartsKing from "../assets/playing-cards/king-hearts.svg";
 import spadesKing from "../assets/playing-cards/king-spades.svg";
 
+import backRed from "../assets/playing-cards/back-red.svg";
+
 const cardSvgs: Record<string, string> = {
   "2-clubs": clubs2,
   "2-diamonds": diamonds2,
@@ -137,14 +139,24 @@ type PlayingCardProps = {
   suit: string;
   // Individual styling for each card
   className: string;
+  // Boolean for whether or not card should be face down
+  faceDown: boolean;
 };
 
-function PlayingCard({ value, suit, className }: PlayingCardProps) {
-  // Build the id for the card based on the passed in props
-  const cardId = `${value}-${suit}`.toLowerCase();
+function PlayingCard({ value, suit, className, faceDown }: PlayingCardProps) {
+  let cardId;
+  let svgSource;
 
-  // Lookup the svgSource from the object
-  const svgSource = cardSvgs[cardId];
+  // Check for dealers hand to give them a face down card
+  if (faceDown) {
+    svgSource = backRed;
+  } else {
+    // Build the id for the card based on the passed in props
+    cardId = `${value}-${suit}`.toLowerCase();
+
+    // Lookup the svgSource from the object
+    svgSource = cardSvgs[cardId];
+  }
 
   // Handle non existent card
   if (!svgSource) {
@@ -158,7 +170,7 @@ function PlayingCard({ value, suit, className }: PlayingCardProps) {
         width={179}
         height={250}
         className="mb-1 me-2"
-        alt={`${value} of ${suit}`}
+        alt={`${faceDown ? "Face down card" : `${value} of ${suit}`}`}
       />
     </div>
   );

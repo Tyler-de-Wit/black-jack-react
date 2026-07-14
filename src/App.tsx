@@ -212,7 +212,7 @@ function App() {
         <div className="player-information">
           <div>
             <h2>Dealer</h2>
-            <p>{calculateHandValue(game.dealersHand)}</p>
+            <p>{!game.playersTurn && calculateHandValue(game.dealersHand)}</p>
           </div>
           <div>
             <h2>Player</h2>
@@ -228,6 +228,9 @@ function App() {
                 suit={card.suit}
                 key={card.id}
                 className={index.toString()}
+                faceDown={
+                  game.playersTurn ? (index === 1 ? true : false) : false
+                }
               />
             ))}
           </div>
@@ -238,6 +241,7 @@ function App() {
                 suit={card.suit}
                 key={card.id}
                 className={index.toString()}
+                faceDown={false}
               />
             ))}
           </div>
