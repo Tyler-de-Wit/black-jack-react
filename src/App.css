@@ -208,7 +208,7 @@ td {
   font-weight: 500;
   width: 20rem;
   text-align: center;
-  padding: 1.54rem 1rem;
+  padding: 1.65rem 1rem;
   border-radius: 8px;
   font-size: 1.2rem;
   position: absolute;
@@ -363,6 +363,6 @@ td {
 
   /* Result Message */
   .result-message {
-    padding: 0.74rem 1rem;
+    padding: 0.8rem 1rem;
   }
 }
