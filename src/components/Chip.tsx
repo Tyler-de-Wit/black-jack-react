@@ -32,7 +32,12 @@ function Chip({ value, totalBalance, onChipClick }: ChipProps) {
       }}
       disabled={totalBalance < value ? true : false}
     >
-      <img src={svgSource} width={80} height={80} alt={`chip ${value}`} />
+      <img
+        src={svgSource}
+        width={80}
+        height={80}
+        alt={`chip ${value.toString()}`}
+      />
     </button>
   );
 }

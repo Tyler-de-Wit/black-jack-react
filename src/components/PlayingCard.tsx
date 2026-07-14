@@ -147,6 +147,7 @@ type PlayingCardProps = {
 function PlayingCard({ value, suit, className, faceDown }: PlayingCardProps) {
   let cardId;
   let svgSource;
+  let altText;
 
   // Check for dealers hand to give them a face down card
   if (faceDown) {
@@ -159,6 +160,13 @@ function PlayingCard({ value, suit, className, faceDown }: PlayingCardProps) {
     svgSource = cardSvgs[cardId];
   }
 
+  // Check if card is face down and give it generic alt text so user can't see what card it is
+  if (faceDown) {
+    altText = "Face down card";
+  } else {
+    altText = `${value} of ${suit}`;
+  }
+
   // Handle non existent card
   if (!svgSource) {
     return null;
@@ -166,12 +174,7 @@ function PlayingCard({ value, suit, className, faceDown }: PlayingCardProps) {
 
   return (
     <div className={`playing-card card-${className}`}>
-      <img
-        src={svgSource}
-        width={179}
-        height={250}
-        alt={`${faceDown ? "Face down card" : `${value} of ${suit}`}`}
-      />
+      <img src={svgSource} width={179} height={250} alt={altText} />
     </div>
   );
 }
