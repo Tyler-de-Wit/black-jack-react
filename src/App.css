@@ -178,6 +178,22 @@ td {
   padding: 12px 15px;
 }
 
+/* Game Rules */
+.game-rules {
+  color: var(--dark-text);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid var(--highlight);
+  background-color: var(--secondary);
+  border-radius: 4px;
+}
+.game-rules h2 {
+  color: var(--dark-text);
+}
+.game-rules ol {
+  margin-left: 1rem;
+}
+
 /* Result Message */
 .result-message {
   font-weight: 500;

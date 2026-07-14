@@ -1,12 +1,16 @@
 import "./App.css";
 import { useState } from "react";
+
 import shuffleDeck from "./lib/shuffleDeck";
 import calculateHandValue from "./lib/calculateHandValue";
+
 import PlayingCard from "./components/PlayingCard";
 import Button from "./components/Button";
 import GameStatistics from "./components/GameStatistics";
 import ResultMessage from "./components/ResultMessage";
 import BettingArea from "./components/BettingArea";
+import GameRules from "./components/GameRules";
+
 import deckOfCards from "./data/deckOfCards";
 
 type Card = {
@@ -279,9 +283,9 @@ function App() {
         dealerWins={gameStatistics.dealerWins}
         playerWins={gameStatistics.playerWins}
       />
-      <p>Dealer stands on hard or soft 17</p>
-      <p>Min Bet: $5</p>
-      <p>Max Bet: $100</p>
+
+      {/* Game Rules */}
+      <GameRules />
     </main>
   );
 }
